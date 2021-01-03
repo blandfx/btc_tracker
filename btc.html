@@ -1,52 +1,64 @@
 
 <style>
 body {
-  padding: 20px;
-  background-color: black;
-  color: rgb(0, 200, 5);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 20px;
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-  text-align: center;
+    padding: 20px;
+    background-color: black;
+    color: rgb(0, 200, 5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
 }
 
 div {
   padding-top: 1em;
 }
+
+#time{
+  font-size: 14px;
+  padding-top: 4em;
+}
+
+#time_updated{
+  padding-top: 0.2em;
+}
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   /* MyHoldings(currentPrice); */
 
-  var formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 
-  function MyHoldings(price) {
-    price = parseFloat(price.replace(/,/g, ''));
-    var myCoin = 0.23082234;
-    console.log(myCoin, price);
-    var myUSD = myCoin * price;
-    document.getElementById("my_holding_USD").innerHTML = formatter.format(myUSD);
-  }
+function MyHoldings(price) {
+	price = parseFloat(price.replace(/,/g, ''));
+  var myCoin = 0.23082234;
+  console.log(myCoin, price);
+  var myUSD = myCoin * price;
+  document.getElementById("my_holding_USD").innerHTML = formatter.format(myUSD);
+}
 
-  function CoinbaseBTCPrice() {
-    $.ajax({
-        url: "https://api.coindesk.com/v1/bpi/currentprice.json",
-        success: function(bitcoinPrice) {
-          currentPrice  = JSON.parse(bitcoinPrice).bpi.USD.rate;
-          document.getElementById("current_BTC").innerHTML = formatter.format(parseFloat(currentPrice.replace(/,/g, '')));
-          MyHoldings(currentPrice);
-      }
-    })
-  }
+function CoinbaseBTCPrice() {
+  $.ajax({
+      url: "https://api.coindesk.com/v1/bpi/currentprice.json",
+      success: function(bitcoinPrice) {
+      	apiQuery = bitcoinPrice;
+      	currentPrice  = JSON.parse(apiQuery).bpi.USD.rate;
+        document.getElementById("current_BTC").innerHTML = formatter.format(parseFloat(currentPrice.replace(/,/g, '')));
+        document.getElementById("time_updated").innerHTML = JSON.parse(apiQuery).time.updated;        
+        MyHoldings(currentPrice);
+    }
+  })
+}
 
   var currentPrice;
   CoinbaseBTCPrice();
-</script
+</script>
 
 <body>
   <div>
@@ -61,4 +73,10 @@ div {
     Loading...
     </div>  
   </div>
+  <div id="time">
+    Last Updated
+    <div id="time_updated">
+    Loading...
+    </div>  
+  </div>  
 </body>
