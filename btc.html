@@ -1,0 +1,64 @@
+
+<style>
+body {
+  padding: 20px;
+  background-color: black;
+  color: rgb(0, 200, 5);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 20px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
+div {
+  padding-top: 1em;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  /* MyHoldings(currentPrice); */
+
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
+  function MyHoldings(price) {
+    price = parseFloat(price.replace(/,/g, ''));
+    var myCoin = 0.23082234;
+    console.log(myCoin, price);
+    var myUSD = myCoin * price;
+    document.getElementById("my_holding_USD").innerHTML = formatter.format(myUSD);
+  }
+
+  function CoinbaseBTCPrice() {
+    $.ajax({
+        url: "https://api.coindesk.com/v1/bpi/currentprice.json",
+        success: function(bitcoinPrice) {
+          currentPrice  = JSON.parse(bitcoinPrice).bpi.USD.rate;
+          document.getElementById("current_BTC").innerHTML = formatter.format(parseFloat(currentPrice.replace(/,/g, '')));
+          MyHoldings(currentPrice);
+      }
+    })
+  }
+
+  var currentPrice;
+  CoinbaseBTCPrice();
+</script
+
+<body>
+  <div>
+    Current BTC/USD Price
+    <div id="current_BTC">
+    Loading...
+    </div>
+  </div>
+  <div>
+    Current USD Holdings
+    <div id="my_holding_USD">
+    Loading...
+    </div>  
+  </div>
+</body>
