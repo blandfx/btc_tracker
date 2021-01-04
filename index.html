@@ -37,7 +37,7 @@ var formatter = new Intl.NumberFormat('en-US', {
 
 function MyHoldings(price) {
 	price = parseFloat(price.replace(/,/g, ''));
-  var myCoin = 0.23082234;
+  var myCoin = 0.25031424;
   console.log(myCoin, price);
   var myUSD = myCoin * price;
   document.getElementById("my_holding_USD").innerHTML = formatter.format(myUSD);
