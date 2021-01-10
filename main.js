@@ -7,7 +7,9 @@ var formatter = new Intl.NumberFormat('en-US', {
 
 function MyHoldings(price) {
 	price = parseFloat(price.replace(/,/g, ''));
-  var myCoin = 0.25031424;
+  var coinbase = 0.22853101
+  var robinhood = 0.02429537
+  var myCoin = coinbase + robinhood;
   var myUSD = myCoin * price;
   document.getElementById("my_holding_USD").innerHTML = formatter.format(myUSD);
 }
