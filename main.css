@@ -1,0 +1,27 @@
+body {
+    padding: 20px;
+    background-color: black;
+    color: rgb(0, 200, 5);
+    font-family: 'system-ui';
+    font-size: 120px;
+    margin: auto;
+    width: 85%;
+    padding: 10px;
+    text-align: center;
+}
+
+div {
+  padding-top: 1em;
+}
+
+#bottom{
+  font-size: 30px;
+  padding-top: 4em;
+  position: absolute;
+  bottom: 50px;
+  margin-left: 25%;
+}
+
+#time_updated{
+  padding-top: 0.2em;
+}
